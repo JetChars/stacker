@@ -1,5 +1,10 @@
 [[local|localrc]]
+
+#frequently changed
 MULTI_HOST=True
+RECLONE=True
+
+#network config
 HOST_IP=192.168.11.68
 FLOATING_RANGE=192.168.0.0/16
 FIXED_RANGE=10.11.12.0/24
@@ -7,42 +12,40 @@ NETWORK_GATEWAY=10.11.12.1
 PUBLIC_NETWORK_GATEWAY=192.168.66.66
 FIXED_NETWORK_SIZE=256
 
+#neutron
 Q_FLOATING_ALLOCATION_POOL=start=192.168.66.166,end=192.168.66.254
-
+Q_PLUGIN=ml2
+Q_ROUTER_NAME=default_router
+ENABLE_TENANT_VLANS=True
+TENANT_VLAN_RANGE=1000:1999
+PHYSICAL_NETWORK=default
+OVS_PHYSICAL_BRIDGE=br-p2p1
 FLAT_INTERFACE=p2p1
 
+#account
 ADMIN_PASSWORD=123456
 SERVICE_TOKEN=$ADMIN_PASSWORD
 MYSQL_PASSWORD=$ADMIN_PASSWORD
 RABBIT_PASSWORD=$ADMIN_PASSWORD
 SERVICE_PASSWORD=$ADMIN_PASSWORD
 
+#logs
 LOGFILE=$DEST/logs/stack.sh.log
 LOGDAYS=2
+SCREEN_LOGDIR=$DEST/logs/screen
 
+#swift
 SWIFT_HASH=66a3d6b56c1f479c8b4e70ab5c2000f5
 SWIFT_REPLICAS=1
 SWIFT_DATA_DIR=$DEST/data
 
 KEYSTONE_TOKEN_FORMAT=UUID
 EXTRA_OPTS=(auto_assign_floating_ip=True)
-SCREEN_LOGDIR=$DEST/logs/screen
 
 ENABLED_SERVICES+=,sahara,neutron,q-svc,q-agt,q-dhcp,q-l3,q-meta,n-novnc,-n-net,-tempest
-Q_PLUGIN=ml2
-
-Q_ROUTER_NAME=default_router
-ENABLE_TENANT_VLANS=True
-TENANT_VLAN_RANGE=1000:1999
-
-PHYSICAL_NETWORK=default
-
-OVS_PHYSICAL_BRIDGE=br-p2p1
-
 
 enable_service ceilometer-acompute ceilometer-acentral ceilometer-anotification ceilometer-collector
 enable_service ceilometer-alarm-evaluator,ceilometer-alarm-notifier
 enable_service ceilometer-api
 enable_service s-proxy s-object s-container s-account
 
-RECLONE=True
