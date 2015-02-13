@@ -19,7 +19,9 @@ for i in object container account; do
 done
 
 for j in $SLAVES;do
-    scp *.gz $j:/ect/swift
+    ssh $j sudo mkdir /etc/swift
+    ssh $j sudo chown stack:stack /etc/swift
+    scp *.gz $j:/etc/swift/
 done
 
 sudo swift-init all restart
