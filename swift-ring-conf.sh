@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#this file need run at dir /etc/swift
 rm -f *.builder *.ring.gz backups/*.builder backups/*.ring.gz
 
 #slaves must be IPs
