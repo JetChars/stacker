@@ -12,8 +12,8 @@ OFFLINE=True
 # Basic
 ##################################################
 
-# IPs Configurations
-####################
+# IP Configurations
+###################
 HOST_IP=192.168.16.16
 FLOATING_RANGE=192.168.16.0/16
 FIXED_RANGE=10.0.0.0/24
