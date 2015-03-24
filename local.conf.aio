@@ -1,10 +1,19 @@
 [[local|localrc]]
 
-#frequently changed
+##################################################
+# Frequently
+##################################################
 MULTI_HOST=True
 RECLONE=False
+OFFLINE=True
 
-#network config
+
+##################################################
+# Basic
+##################################################
+
+# IPs Configurations
+####################
 HOST_IP=192.168.16.16
 FLOATING_RANGE=192.168.16.0/16
 FIXED_RANGE=10.0.0.0/24
@@ -12,7 +21,28 @@ NETWORK_GATEWAY=10.0.0.1
 PUBLIC_NETWORK_GATEWAY=192.168.101.254
 FIXED_NETWORK_SIZE=256
 
-#neutron
+# Authentication
+################
+ADMIN_PASSWORD=123456
+SERVICE_TOKEN=$ADMIN_PASSWORD
+MYSQL_PASSWORD=$ADMIN_PASSWORD
+RABBIT_PASSWORD=$ADMIN_PASSWORD
+SERVICE_PASSWORD=$ADMIN_PASSWORD
+KEYSTONE_TOKEN_FORMAT=UUID
+
+# Logs
+######
+LOGFILE=$DEST/logs/stack.sh.log
+LOGDAYS=2
+SCREEN_LOGDIR=$DEST/logs/screen
+
+
+##################################################
+# Service Configurations
+##################################################
+
+# Neutron
+#########
 Q_FLOATING_ALLOCATION_POOL=start=192.168.101.166,end=192.168.101.253
 Q_PLUGIN=ml2
 Q_ROUTER_NAME=default_router
@@ -24,28 +54,20 @@ TUNNEL_ENDPOINT_IP=172.16.3.16
 #OVS_PHYSICAL_BRIDGE=br-enp6s0f1
 #FLAT_INTERFACE=enp6s0f1
 
-#account
-ADMIN_PASSWORD=123456
-SERVICE_TOKEN=$ADMIN_PASSWORD
-MYSQL_PASSWORD=$ADMIN_PASSWORD
-RABBIT_PASSWORD=$ADMIN_PASSWORD
-SERVICE_PASSWORD=$ADMIN_PASSWORD
-
-#logs
-LOGFILE=$DEST/logs/stack.sh.log
-LOGDAYS=2
-SCREEN_LOGDIR=$DEST/logs/screen
-
-#swift
+# Swift
+#######
 SWIFT_HASH=66a3d6b56c1f479c8b4e70ab5c2000f5
 SWIFT_REPLICAS=1
 SWIFT_DATA_DIR=$DEST/data
 
-KEYSTONE_TOKEN_FORMAT=UUID
+# Sahara
+########
 EXTRA_OPTS=(auto_assign_floating_ip=True)
 
+##################################################
+# Enable Services
+##################################################
 ENABLED_SERVICES+=,sahara,neutron,q-svc,q-agt,q-dhcp,q-l3,q-meta,n-novnc,-n-net,-tempest
-
 enable_service ceilometer-acompute ceilometer-acentral ceilometer-anotification ceilometer-collector
 enable_service ceilometer-alarm-evaluator,ceilometer-alarm-notifier
 enable_service ceilometer-api
