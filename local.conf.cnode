@@ -1,30 +1,27 @@
 [[local|localrc]]
 
-#frequently
+##################################################
+# Frequently
+##################################################
 MULTIHOST=True
 RECLONE=False
 OFFLINE=False
 
-#network
-HOST_IP=192.168.1.37
-SERVICE_HOST=192.168.1.24
+
+##################################################
+# Basic
+##################################################
+
+# IP Configurations
+###################
+HOST_IP=192.168.16.7
+SERVICE_HOST=192.168.16.16
 MYSQL_HOST=$SERVICE_HOST
 RABBIT_HOST=$SERVICE_HOST
 GLANCE_HOSTPORT=$SERVICE_HOST:9292
 
-# Neutron options
-Q_USE_SECGROUP=True
-ENABLE_TENANT_VLANS=True
-TENANT_VLAN_RANGE=3001:4000
-PHYSICAL_NETWORK=default
-OVS_PHYSICAL_BRIDGE=br-ex
-Q_USE_PROVIDER_NETWORKING=True
-Q_L3_ENABLED=False
-Q_SERVER=$SERVICE_HOST
-FLAT_INTERFACE=eth1
-PUBLIC_INTERFACE=eth1
-
-#account
+# Authentication
+################ 
 ADMIN_PASSWORD=123456
 SERVICE_TOKEN=$ADMIN_PASSWORD
 MYSQL_PASSWORD=$ADMIN_PASSWORD
@@ -33,15 +30,41 @@ SERVICE_PASSWORD=$ADMIN_PASSWORD
 DATABASE_TYPE=mysql
 KEYSTONE_TOKEN_FORMAT=UUID
 
-#logs
+# Logs
+######
 LOGFILE=$DEST/logs/stack.sh.log
 LOGDAYS=2
 SCREEN_LOGDIR=$DEST/logs/screen
 
-# Services that a compute node runs
-ENABLED_SERVICES=n-cpu,rabbit,q-agt,n-novnc
+
+##################################################
+# Service Configurations
+##################################################
+
+# Neutron
+#########
+#Q_USE_SECGROUP=True
+#ENABLE_TENANT_VLANS=True
+#TENANT_VLAN_RANGE=3001:4000
+#PHYSICAL_NETWORK=default
+#OVS_PHYSICAL_BRIDGE=br-eno2
+#Q_USE_PROVIDER_NETWORKING=True
+#Q_L3_ENABLED=False
+Q_PLUGIN=ml2
+#Q_SERVER=192.168.16.16
+ENABLE_TENANT_TUNNELS=True
+TUNNEL_ENDPOINT_IP=172.16.3.7
+#FLAT_INTERFACE=eno2
+#PUBLIC_INTERFACE=eno2
+
+# Nova
 NOVNCPROXY_URL="http://$SERVICE_HOST:6080/vnc_auto.html"
 VNCSERVER_LISTEN=$HOST_IP
 VNCSERVER_PROXYCLIENT_ADDRESS=$VNCSERVER_LISTEN
 
+
+##################################################
+# Enable Services
+##################################################
+ENABLED_SERVICES=n-cpu,rabbit,q-agt,n-novnc
 
