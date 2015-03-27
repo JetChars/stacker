@@ -34,27 +34,27 @@ SCREEN_LOGDIR=$DEST/logs/screen
 
 # Public Network
 ################
-FLOATING_RANGE=192.168.16.0/16
-Q_FLOATING_ALLOCATION_POOL=start=192.168.105.166,end=192.168.105.253
-Q_ROUTER_NAME=default_router
-PUBLIC_NETWORK_GATEWAY=192.168.105.254
-#Q_DVR_MODE=dvr_snat
 #FLAT_INTERFACE=enp6s0f1
 #PUBLIC_INTERFACE=eno2
 
 
-# Private Network
-#################
+# Neutron-GRE-tunnel
+####################
+ENABLED_SERVICES+=,q-svc,q-agt,q-dhcp,q-l3,q-meta,neutron
+Q_FLOATING_ALLOCATION_POOL=start=192.168.105.166,end=192.168.105.253
+Q_ROUTER_NAME=default_router
+PUBLIC_NETWORK_GATEWAY=192.168.105.254
+FLOATING_RANGE=192.168.0.0/16
+
 FIXED_RANGE=10.1.1.0/24
 FIXED_NETWORK_SIZE=256
 NETWORK_GATEWAY=10.1.1.1
 
-# Neutron-GRE-tunnel
-####################
 Q_PLUGIN=ml2
 Q_ML2_TENANT_NETWORK_TYPE=gre
 ENABLE_TENANT_TUNNELS=True
 TUNNEL_ENDPOINT_IP=172.16.1.5
+#Q_DVR_MODE=dvr_snat
 
 # Neutron-VXLAN-tunnel
 ######################
@@ -70,19 +70,20 @@ TUNNEL_ENDPOINT_IP=172.16.1.5
 
 # Swift
 #######
-SWIFT_HASH=66a3d6b56c1f479c8b4e70ab5c2000f5
-SWIFT_REPLICAS=1
-SWIFT_DATA_DIR=$DEST/data
+#enable_service s-proxy s-object s-container s-account
+#SWIFT_HASH=66a3d6b56c1f479c8b4e70ab5c2000f5
+#SWIFT_REPLICAS=1
+#SWIFT_DATA_DIR=$DEST/data
 
 # Sahara
 ########
+ENABLED_SERVICES+=,sahara
 EXTRA_OPTS=(auto_assign_floating_ip=True)
 
 ##################################################
-# Enable Services
+# Enable Other Services
 ##################################################
-ENABLED_SERVICES+=,sahara,neutron,q-svc,q-agt,q-dhcp,q-l3,q-meta,n-novnc,-n-net,-tempest,-c-api,-c-sch,-c-vol
+ENABLED_SERVICES+=,n-novnc,-n-net,-tempest,-c-api,-c-sch,-c-vol
 #enable_service ceilometer-acompute ceilometer-acentral ceilometer-anotification ceilometer-collector
 #enable_service ceilometer-alarm-evaluator,ceilometer-alarm-notifier
 #enable_service ceilometer-api
-#enable_service s-proxy s-object s-container s-account
