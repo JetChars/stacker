@@ -41,22 +41,34 @@ VERBOSE=True
 # Service Configurations
 ##################################################
 
-# Neutron
-#########
-#Q_USE_SECGROUP=True
-#ENABLE_TENANT_VLANS=True
-#TENANT_VLAN_RANGE=3001:4000
-#PHYSICAL_NETWORK=default
-#OVS_PHYSICAL_BRIDGE=br-eno2
-#Q_USE_PROVIDER_NETWORKING=True
-#Q_L3_ENABLED=False
+# Neutron-gre-tunnel
+####################
+#ENABLED_SERVICES=n-cpu,rabbit,q-agt,n-novnc
+##Q_USE_SECGROUP=True
+##ENABLE_TENANT_VLANS=True
+##TENANT_VLAN_RANGE=3001:4000
+##PHYSICAL_NETWORK=default
+##OVS_PHYSICAL_BRIDGE=br-eno2
+##Q_USE_PROVIDER_NETWORKING=True
+##Q_L3_ENABLED=False
+#Q_PLUGIN=ml2
+#Q_ML2_TENANT_NETWORK_TYPE=gre
+##Q_SERVER=192.168.16.16
+#ENABLE_TENANT_TUNNELS=True
+#TUNNEL_ENDPOINT_IP=172.16.1.6
+##FLAT_INTERFACE=eno2
+##PUBLIC_INTERFACE=eno2
+
+# Neutron-vxlan-tunnel-dvr
+ENABLED_SERVICES=n-cpu,rabbit,q-agt,q-l3,q-meta,n-novnc,neutron
 Q_PLUGIN=ml2
-Q_ML2_TENANT_NETWORK_TYPE=gre
+Q_ML2_TENANT_NETWORK_TYPE=vxlan
 #Q_SERVER=192.168.16.16
-ENABLE_TENANT_TUNNELS=True
-TUNNEL_ENDPOINT_IP=172.16.1.6
-#FLAT_INTERFACE=eno2
-#PUBLIC_INTERFACE=eno2
+TUNNEL_ENDPOINT_IP=192.168.1.34
+Q_DVR_MODE=dvr
+Q_SERVICE_PLUGIN_CLASSES=neutron.services.l3_router.l3_router_plugin.L3RouterPlugin
+Q_ML2_PLUGIN_MECHANISM_DRIVERS=openvswitch,linuxbridge,l2population
+
 
 # Nova
 NOVNCPROXY_URL="http://$SERVICE_HOST:6080/vnc_auto.html"
@@ -67,5 +79,4 @@ VNCSERVER_PROXYCLIENT_ADDRESS=$VNCSERVER_LISTEN
 ##################################################
 # Enable Services
 ##################################################
-ENABLED_SERVICES=n-cpu,rabbit,q-agt,n-novnc
 
