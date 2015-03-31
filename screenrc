@@ -1,0 +1,2 @@
+caption always '%{=b cw}%-w%{=rb db}%>%n %t%{-}%+w%{-b}%< %{= kG}%-=%D %c%{-}'
+shelltitle '$ |bash'
