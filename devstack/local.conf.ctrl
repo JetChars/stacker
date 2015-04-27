@@ -94,6 +94,18 @@ Q_ML2_PLUGIN_MECHANISM_DRIVERS=openvswitch,linuxbridge,l2population
 ENABLED_SERVICES+=,sahara
 EXTRA_OPTS=(auto_assign_floating_ip=True)
 
+# Nova Docker
+# ###########
+## Introduce glance to docker images
+#[[post-config|$GLANCE_API_CONF]]
+#[DEFAULT]
+#container_formats=ami,ari,aki,bare,ovf,ova,docker
+#
+## Configure nova to use the nova-docker driver
+#[[post-config|$NOVA_CONF]]
+#[DEFAULT]
+#compute_driver=novadocker.virt.docker.DockerDriver
+
 ##################################################
 # Enable Other Services
 ##################################################
