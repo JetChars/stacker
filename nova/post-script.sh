@@ -1,4 +1,4 @@
-echo never /sys/kernel/mm/redhat_transparent_hugepage/enabled
+echo never > /sys/kernel/mm/redhat_transparent_hugepage/enabled
 
 sudo mkdir -p /home/hadoop/.ssh
 sudo chmod 700 /home/hadoop/.ssh
