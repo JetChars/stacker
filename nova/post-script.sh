@@ -1,3 +1,5 @@
+echo never /sys/kernel/mm/redhat_transparent_hugepage/enabled
+
 sudo mkdir -p /home/hadoop/.ssh
 sudo chmod 700 /home/hadoop/.ssh
 sudo cat >> /home/hadoop/.ssh/authorized_keys << EOF
