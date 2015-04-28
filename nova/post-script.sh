@@ -68,3 +68,10 @@ proxy=http://child-prc.intel.com:913
 EOF
 
 yum install -y openssh-clients
+
+cat >> /etc/hosts << EOF
+10.1.1.33 test-1
+10.1.1.34 test-2
+10.1.1.35 test-3
+10.1.1.36 test-4
+EOF
