@@ -5,6 +5,8 @@
 # example: ./qcow2-resize.sh centos_sahara_vanilla_hadoop_2_6_latest.selinux-permissive.fixlib.qcow2 tmp.qcow2 100G
 ##################################################
 
+TOP_DIR=$(cd $(dirname "$0")/.. && pwd)
+
 # guestfish - the libguestfs Filesystem Interactive SHell
 apt-cache search libguestfs-tool || rpm -q libguestfs-tools ||sudo apt-get install libguestfs-tools -y --force-yes 2>/dev/null || sudo yum install -y libguestfs-tools
 qemu-img create -f qcow2 $2 $3
