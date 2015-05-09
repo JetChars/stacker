@@ -61,8 +61,6 @@ echo "nameserver 10.248.2.1" > /etc/resolv.conf
 
 sudo chown hadoop:hadoop /mnt -R
 
-sudo ip route del default
-sudo ip route add default via 10.1.1.2
 cat >> /etc/yum.conf << EOF
 proxy=http://child-prc.intel.com:913
 EOF
@@ -70,8 +68,22 @@ EOF
 yum install -y openssh-clients
 
 cat >> /etc/hosts << EOF
-10.1.1.41 test-1
-10.1.1.42 test-2
-10.1.1.43 test-3
-10.1.1.44 test-4
+10.1.1.51 test-1
+10.1.1.52 test-2
+10.1.1.53 test-3
+10.1.1.54 test-4
+10.1.1.55 test-5
+10.1.1.56 test-6
+10.1.1.57 test-7
+10.1.1.58 test-8
+10.1.1.59 test-9
+10.1.1.60 test-10
+10.1.1.61 test-11
+10.1.1.62 test-12
+10.1.1.63 test-13
+10.1.1.64 test-14
+10.1.1.65 test-15
+10.1.1.66 test-16
 EOF
+
+sudo ip route del default; sudo ip route add default via 10.1.1.2
