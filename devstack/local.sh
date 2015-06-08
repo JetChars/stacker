@@ -11,7 +11,7 @@
 
 
 # Keep track of the DevStack directory
-TOP_DIR=$(cd $(dirname "$0") && pwd)
+TOP_DIR=$(cd $(dirname "$0")/../../devstack && pwd)
 
 # Import common functions
 source $TOP_DIR/functions
@@ -63,8 +63,8 @@ if is_service_enabled nova; then
     nova secgroup-add-rule default tcp 1 65535 0.0.0.0/0
     nova secgroup-add-rule default udp 1 65535 0.0.0.0/0
 
-    echo 'dnsmasq_config_file = /etc/neutron/dnsmasq-neutron.conf' >> /etc/neutron/dhcp_agent.ini
-    echo 'dhcp-option-force=26,1400' >> /etc/neutron/dnsmasq-neutron.conf
+    sudo echo 'dnsmasq_config_file = /etc/neutron/dnsmasq-neutron.conf' >> /etc/neutron/dhcp_agent.ini
+    sudo echo 'dhcp-option-force=26,1400' >> /etc/neutron/dnsmasq-neutron.conf
     sudo pkill -1 neutron-dhcp-agent
 
     # Get OpenStack demo auth
@@ -76,6 +76,6 @@ if is_service_enabled nova; then
     
     sudo service firewalld stop
 
-    glance image-create --name=centos_sahara_vanilla_hadoop_2_6_latest.selinux-permissive.fixlib-${DEFAULT_DISK_SIZE} --store=file --disk-format=qcow2 --file=centos_sahara_vanilla_hadoop_2_6_latest.selinux-permissive.fixlib${DEFAULT_DISK_SIZE}.qcow2 --is-public=True --container-format=bare --min-disk=${DEFAULT_DISK_SIZE}
-    nova boot --flavor=F${DEFAULT_DISK_SIZE}q --image=centos_sahara_vanilla_hadoop_2_6_latest.selinux-permissive.fixlib-${DEFAULT_DISK_SIZE} test
+    #glance image-create --name=centos_sahara_vanilla_hadoop_2_6_latest.selinux-permissive.fixlib-${DEFAULT_DISK_SIZE} --store=file --disk-format=qcow2 --file=centos_sahara_vanilla_hadoop_2_6_latest.selinux-permissive.fixlib${DEFAULT_DISK_SIZE}.qcow2 --is-public=True --container-format=bare --min-disk=${DEFAULT_DISK_SIZE}
+    #nova boot --flavor=F${DEFAULT_DISK_SIZE}q --image=centos_sahara_vanilla_hadoop_2_6_latest.selinux-permissive.fixlib-${DEFAULT_DISK_SIZE} test
 fi
