@@ -1,0 +1,27 @@
+# pkg groups
+############
+@base
+@console-internet
+@core
+@debugging
+@directory-client
+@hardware-monitoring
+@java-platform
+@large-systems
+@network-file-system-client
+@performance
+@perl-runtime
+@virtualization-client
+@virtualization-platform
+
+# pkgs
+######
+pax
+oddjob
+sgpio
+device-mapper-persistent-data
+samba-winbind
+certmonger
+pam_krb5
+krb5-workstation
+perl-DBD-SQLite
